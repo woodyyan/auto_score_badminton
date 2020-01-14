@@ -1,14 +1,24 @@
-import importlib.util
 import os
+import importlib.util
+import sys
 
 
 class ProjectSpec:
     def __init__(self, student_id, project_file):
         self.student_id = student_id
         self.badminton_request_file = project_file
+        self.score = 0
 
 
 class ServiceRunner:
+    def run(self, dir) -> []:
+        project_specs = self.build_all_project_specs(dir)
+        for spec in project_specs:
+            printed_message = self.run_request_service(spec.badminton_request_file)
+            score = self.check_score(printed_message)
+            spec.score = score
+        return project_specs
+
     def build_all_project_specs(self, dir: str) -> []:
         prefix = 'badminton_project_'
         badminton_file_name = 'badminton_request.py'
@@ -33,13 +43,10 @@ class ServiceRunner:
                 _files.append(path)
         return _files
 
-    def find_all_request_service_class(self, file_paths: []) -> []:
-        for path in file_paths:
-            module_spec = importlib.util.spec_from_file_location('request_service', path)
-        pass
-
-    def run_request_service(self) -> str:
-        pass
+    def run_request_service(self, badminton_dir) -> str:
+        sys.path.append(badminton_dir)
+        import badminton_request
+        return badminton_request.request_service('How much?')
 
     def check_score(self, printed_message: str) -> int:
         first_line = '********Price********'
@@ -70,3 +77,4 @@ class ServiceRunner:
 
 if __name__ == '__main__':
     service_runner = ServiceRunner()
+    project_specs = service_runner.run('/Users/songbai.yan/Downloads/Python/auto/badminton_project_c00502521')
