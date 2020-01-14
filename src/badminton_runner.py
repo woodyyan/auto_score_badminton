@@ -10,7 +10,7 @@ class ProjectSpec:
         self.score = 0
 
 
-class ServiceRunner:
+class BadmintonScorer:
     def run(self, dir) -> []:
         project_specs = self.build_all_project_specs(dir)
         for spec in project_specs:
@@ -76,5 +76,5 @@ class ServiceRunner:
 
 
 if __name__ == '__main__':
-    service_runner = ServiceRunner()
+    service_runner = BadmintonScorer()
     project_specs = service_runner.run('/Users/songbai.yan/Downloads/Python/auto/badminton_project_c00502521')
