@@ -20,6 +20,7 @@ class ServiceRunner:
 12:00~18:00 50 yuan/h
 18:00~22:00 60 yuan/h'''
         lines = printed_message.split('\n')
+        lines = [line for line in lines if line]
         score = 0
         if first_line in printed_message and second_line in printed_message and last_line in printed_message:
             score += 5
