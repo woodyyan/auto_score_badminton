@@ -1,6 +1,41 @@
-class ServiceRunner:
+import importlib.util
+import os
 
-    def find_request_service_class(self):
+
+class ProjectSpec:
+    def __init__(self, student_id, project_file):
+        self.student_id = student_id
+        self.badminton_request_file = project_file
+
+
+class ServiceRunner:
+    def build_all_project_specs(self, dir: str) -> []:
+        prefix = 'badminton_project_'
+        badminton_file_name = 'badminton_request.py'
+        project_specs = []
+        for root, folders, files in os.walk(dir):
+            for folder in folders:
+                if folder.startswith(prefix):
+                    student_id = folder.strip(prefix)
+                    all_files = self.__list_all_files(os.path.join(root, folder))
+                    badminton_file = next(filter(lambda file: file.endswith(badminton_file_name), all_files), None)
+                    project_specs.append(ProjectSpec(student_id, badminton_file))
+        return project_specs
+
+    def __list_all_files(self, root_dir):
+        _files = []
+        names = os.listdir(root_dir)
+        for name in names:
+            path = os.path.join(root_dir, name)
+            if os.path.isdir(path):
+                _files.extend(self.__list_all_files(path))
+            if os.path.isfile(path):
+                _files.append(path)
+        return _files
+
+    def find_all_request_service_class(self, file_paths: []) -> []:
+        for path in file_paths:
+            module_spec = importlib.util.spec_from_file_location('request_service', path)
         pass
 
     def run_request_service(self) -> str:
@@ -35,4 +70,3 @@ class ServiceRunner:
 
 if __name__ == '__main__':
     service_runner = ServiceRunner()
-

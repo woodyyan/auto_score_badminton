@@ -40,6 +40,15 @@ Welcome to badminton
 
         self.assertEqual(score, 25)
 
+    def test_should_return_1_when_build_all_project_specs_given_dir(self):
+        dir = './test_data'
+        service_runner = ServiceRunner()
+        project_specs = service_runner.build_all_project_specs(dir)
+        self.assertEqual(len(project_specs), 1)
+        self.assertEqual(project_specs[0].student_id, '001')
+        self.assertEqual(project_specs[0].badminton_request_file,
+                         './test_data/badminton_project_c001/badminton_request.py')
+
 
 if __name__ == '__main__':
     unittest.main()
