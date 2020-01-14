@@ -48,8 +48,8 @@ Welcome to badminton
         project_specs = service_runner.build_all_project_specs(dir)
         self.assertEqual(len(project_specs), 1)
         self.assertEqual(project_specs[0].student_id, '001')
-        self.assertEqual(project_specs[0].badminton_request_file,
-                         './test_data/badminton_project_c001/badminton_request.py')
+        self.assertEqual(project_specs[0].badminton_request_dir,
+                         './test_data/badminton_project_c001')
 
     def test_should_return_correct_printed_message_when_run_badminton_py_file(self):
         service_runner = ServiceRunner()
@@ -69,10 +69,12 @@ Welcome to badminton
 **Have a good day !**'''
         self.assertEqual(spec, expected_message)
 
-
-
-
-
+    def test_should_return_one_spec_when_run_badminton_service(self):
+        service_runner = ServiceRunner()
+        badminton_dir = './test_data'
+        specs = service_runner.run(badminton_dir)
+        self.assertEqual(len(specs), 1)
+        self.assertEqual(specs[0].score, 40)
 
 
 if __name__ == '__main__':

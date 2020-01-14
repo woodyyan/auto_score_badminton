@@ -4,9 +4,9 @@ import sys
 
 
 class ProjectSpec:
-    def __init__(self, student_id, project_file):
+    def __init__(self, student_id, badminton_request_dir):
         self.student_id = student_id
-        self.badminton_request_file = project_file
+        self.badminton_request_dir = badminton_request_dir
         self.score = 0
 
 
@@ -14,7 +14,7 @@ class ServiceRunner:
     def run(self, dir) -> []:
         project_specs = self.build_all_project_specs(dir)
         for spec in project_specs:
-            printed_message = self.run_request_service(spec.badminton_request_file)
+            printed_message = self.run_request_service(spec.badminton_request_dir)
             score = self.check_score(printed_message)
             spec.score = score
         return project_specs
@@ -29,7 +29,7 @@ class ServiceRunner:
                     student_id = folder.strip(prefix)
                     all_files = self.__list_all_files(os.path.join(root, folder))
                     badminton_file = next(filter(lambda file: file.endswith(badminton_file_name), all_files), None)
-                    project_specs.append(ProjectSpec(student_id, badminton_file))
+                    project_specs.append(ProjectSpec(student_id, os.path.dirname(badminton_file)))
         return project_specs
 
     def __list_all_files(self, root_dir):
