@@ -23,7 +23,7 @@ Welcome to badminton
 **Have a good day !**
 '''
         service_runner = BadmintonScorer()
-        score = service_runner.check_score(printed_message)
+        score = service_runner.check_how_much_score(printed_message)
 
         self.assertEqual(score, 40)
 
@@ -40,7 +40,7 @@ Welcome to badminton
 18:00~22:00 60 yuan/h
 '''
         service_runner = BadmintonScorer()
-        score = service_runner.check_score(printed_message)
+        score = service_runner.check_how_much_score(printed_message)
 
         self.assertEqual(score, 25)
 

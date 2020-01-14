@@ -14,7 +14,7 @@ class BadmintonScorer:
         project_specs = self.build_all_project_specs(dir)
         for spec in project_specs:
             printed_message = self.run_request_service(spec.badminton_request_dir)
-            score = self.check_score(printed_message)
+            score = self.check_how_much_score(printed_message)
             spec.score = score
         return project_specs
 
@@ -47,7 +47,7 @@ class BadmintonScorer:
         import badminton_request
         return badminton_request.request_service('How much?')
 
-    def check_score(self, printed_message: str) -> int:
+    def check_how_much_score(self, printed_message: str) -> int:
         first_line = '********Price********'
         second_line = 'Welcome to badminton'
         last_line = '**Have a good day !**'
