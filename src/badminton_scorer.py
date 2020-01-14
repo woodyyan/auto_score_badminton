@@ -21,7 +21,7 @@ class BadmintonScorer:
 
     def build_all_project_specs(self, dir: str) -> []:
         prefix = 'badminton_project_'
-        badminton_file_name = 'badminton_request.py'
+        badminton_file_name = '/badminton_request.py'
         project_specs = []
         for root, folders, files in os.walk(dir):
             for folder in folders:

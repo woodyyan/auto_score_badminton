@@ -2,7 +2,7 @@ import importlib.util
 import sys
 import unittest
 
-from src.badminton_runner import BadmintonScorer
+from src.badminton_scorer import BadmintonScorer
 
 
 class TestServiceRunnerCase(unittest.TestCase):
