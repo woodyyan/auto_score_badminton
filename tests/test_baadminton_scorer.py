@@ -46,6 +46,15 @@ Welcome to badminton
         score = badminton_scorer.check_part_b_score(dir)
         self.assertEqual(60, score)
 
+    def test_should_return_score_summary_when_check_given_dir(self):
+        badminton_scorer = BadmintonScorer()
+        dir = './test_data/badminton_project_c001'
+        score_summary = badminton_scorer.check(dir)
+        self.assertEqual(40, score_summary.part_a_score)
+        self.assertEqual(60, score_summary.part_b_score)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

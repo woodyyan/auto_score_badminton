@@ -1,14 +1,23 @@
 from src.badminton_service import BadmintonService
 
 
+class ScoreSummary:
+    def __init__(self):
+        self.part_a_score = 0
+        self.part_b_score = 0
+        self.part_c_score = 0
+        self.test_coverage = 0
+
+
 class BadmintonScorer:
-    def check(self, badminton_service_dir: str) -> int:
-        score = 0
+    def check(self, badminton_service_dir: str) -> ScoreSummary:
+        score_summary = ScoreSummary()
         service = BadmintonService()
         part_a_param = 'How much?'
         part_a_message = service.request_service(badminton_service_dir, part_a_param)
-        score += self.check_part_a_score(part_a_message)
-        return score
+        score_summary.part_a_score = self.check_part_a_score(part_a_message)
+        score_summary.part_b_score = self.check_part_b_score(badminton_service_dir)
+        return score_summary
 
     def check_part_b_score(self, badminton_service_dir: str) -> int:
         service = BadmintonService()
@@ -74,11 +83,3 @@ class BadmintonScorer:
         if len(lines) == 12:
             score += 10
         return score
-
-
-class ScoreInfo:
-    def __init__(self):
-        self.part_a_score = 0
-        self.part_b_score = 0
-        self.part_c_score = 0
-        self.test_coverage = 0
