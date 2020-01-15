@@ -10,8 +10,21 @@ class BadmintonScorer:
         score += self.check_part_a_score(part_a_message)
         return score
 
-    def check_book_score(self, printed_message: str) -> int:
-        pass
+    def check_part_b_score(self, badminton_service_dir: str) -> int:
+        service = BadmintonService()
+        success_param = 'Book 0001 2019-12-01 14:00~15:00 3'
+        success_message = service.request_service(badminton_service_dir, success_param)
+        score = 0
+        success_keyword = 'Success'
+        if success_keyword in success_message:
+            score += 5
+        # Success! You can use the No.3 court during 2019-12-11 14:00~15:00.
+        all_keywords = ['No.3', '2019', '12', '11', '14', '15']
+        contained_keywords = [True for keyword in all_keywords if keyword in success_message]
+        if len(contained_keywords) == len(all_keywords):
+            score += 15
+
+        return score
 
     def check_part_a_score(self, printed_message: str) -> int:
 

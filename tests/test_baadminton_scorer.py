@@ -18,8 +18,8 @@ Welcome to badminton
 18:00~22:00 60 yuan/h
 **Have a good day !**
 '''
-        service_runner = BadmintonScorer()
-        score = service_runner.check_part_a_score(printed_message)
+        badminton_scorer = BadmintonScorer()
+        score = badminton_scorer.check_part_a_score(printed_message)
 
         self.assertEqual(40, score)
 
@@ -35,10 +35,16 @@ Welcome to badminton
 12:00~18:00 50 yuan/h
 18:00~22:00 60 yuan/h
 '''
-        service_runner = BadmintonScorer()
-        score = service_runner.check_part_a_score(printed_message)
+        badminton_scorer = BadmintonScorer()
+        score = badminton_scorer.check_part_a_score(printed_message)
 
         self.assertEqual(score, 25)
+
+    def test_should_return_20_when_check_part_b_given_can_success_message(self):
+        badminton_scorer = BadmintonScorer()
+        dir = './test_data/badminton_project_c001'
+        score = badminton_scorer.check_part_b_score(dir)
+        self.assertEqual(20, score)
 
 
 if __name__ == '__main__':

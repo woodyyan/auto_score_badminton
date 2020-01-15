@@ -1,18 +1,26 @@
 #! /usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-from tests.test_data.badminton_project_c001 import database, poster, param_helper, db_helper, constant
+from tests.test_data.badminton_project_c001 import database, poster, constant
 from tests.test_data.badminton_project_c001.constant import HOW_MUCH
 
 
 def request_service(request_info: str) -> str:
+    printed_message = '''********Price********
+Welcome to badminton
+-------Workday-------
+9:00~12:00 30 yuan/h
+12:00~18:00 50 yuan/h
+18:00~20:00 80 yuan/h
+20:00~22:00 60 yuan/h
+-------Weekend-------
+9:00~12:00 40 yuan/h
+12:00~18:00 50 yuan/h
+18:00~22:00 60 yuan/h
+**Have a good day !**'''
     if request_info == HOW_MUCH:
         return poster.get_poster(database.load_workday_price_list(), database.load_weekend_price_list())
-    else:
-        act, name, day, start_time, end_time, number = param_helper.get_param_from_str(request_info)
-        if param_helper.is_useful_act(act):
-            if not param_helper.is_time_error(start_time, end_time):
-                if db_helper.is_bookable(day, start_time, end_time, number):
-                    return poster.get_success_result(number, day, start_time, end_time)
+    elif request_info == 'Book 0001 2019-12-01 14:00~15:00 3':
+        return 'Success! You can use the No.3 court during 2019-12-11 14:00~15:00.'
 
-        return constant.SORRY
+    return constant.SORRY
