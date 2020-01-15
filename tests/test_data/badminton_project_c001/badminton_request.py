@@ -25,5 +25,9 @@ Welcome to badminton
         return constant.SORRY
     elif request_info == 'Book 0001 2019-12-01 14:00~15:00 3':
         return 'Success! You can use the No.3 court during 2019-12-11 14:00~15:00.'
+    elif request_info == 'Book 0001 2019-12-01 14:00~14:20 3':
+        return constant.SORRY
+    elif request_info == 'Book 0001 2019-12-01 15:00~14:00 3':
+        return constant.SORRY
 
-    return constant.SORRY
+    return ''
