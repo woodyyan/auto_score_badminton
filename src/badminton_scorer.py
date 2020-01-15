@@ -23,10 +23,14 @@ class BadmintonScorer:
         if len(contained_keywords) == len(all_keywords):
             score += 15
         invalid_time_param = 'Book 0001 2019-12-01 14:00~14:20 3'
-        fail_message = service.request_service(badminton_service_dir, invalid_time_param)
         fail_sentence = 'Sorry! Something wrong, please call the manager!'
+        fail_message = service.request_service(badminton_service_dir, invalid_time_param)
         if fail_message == fail_sentence:
             score += 6
+        duplicated_book_param = 'Book 0001 2019-12-01 14:00~16:00 3'
+        fail_message = service.request_service(badminton_service_dir, duplicated_book_param)
+        if fail_message == fail_sentence:
+            score += 16
 
         return score
 

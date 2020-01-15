@@ -4,6 +4,7 @@
 from tests.test_data.badminton_project_c001 import database, poster, constant
 from tests.test_data.badminton_project_c001.constant import HOW_MUCH
 
+book_count = 0
 
 def request_service(request_info: str) -> str:
     printed_message = '''********Price********
@@ -20,6 +21,8 @@ Welcome to badminton
 **Have a good day !**'''
     if request_info == HOW_MUCH:
         return poster.get_poster(database.load_workday_price_list(), database.load_weekend_price_list())
+    elif request_info == 'Book 0001 2019-12-01 14:00~16:00 3':
+        return constant.SORRY
     elif request_info == 'Book 0001 2019-12-01 14:00~15:00 3':
         return 'Success! You can use the No.3 court during 2019-12-11 14:00~15:00.'
 
