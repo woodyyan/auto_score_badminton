@@ -22,14 +22,15 @@ class BadmintonScorer:
         success_param = 'Book 0001 2019-12-01 14:00~15:00 3'
         success_message = service.request_service(badminton_service_dir, success_param)
         score = 0
-        success_keyword = 'Success'
-        if success_keyword in success_message:
-            score += 5
+        if success_message:
+            success_keyword = 'Success'
+            if success_keyword in success_message:
+                score += 5
 
-        all_keywords = ['No.3', '2019', '12', '11', '14', '15']
-        contained_keywords = [True for keyword in all_keywords if keyword in success_message]
-        if len(contained_keywords) == len(all_keywords):
-            score += 15
+            all_keywords = ['No.3', '2019', '12', '11', '14', '15']
+            contained_keywords = [True for keyword in all_keywords if keyword in success_message]
+            if len(contained_keywords) == len(all_keywords):
+                score += 15
 
         invalid_time_param = 'Book 0001 2019-12-01 14:00~14:20 3'
         score += self.__check_invalid_case(badminton_service_dir, invalid_time_param, 6)
@@ -73,17 +74,18 @@ class BadmintonScorer:
         part_a_param = 'How much?'
         service = BadmintonService()
         printed_message = service.request_service(badminton_service_dir, part_a_param)
-        lines = printed_message.split('\n')
-        lines = [line for line in lines if line]
         score = 0
-        if first_line in printed_message and second_line in printed_message and last_line in printed_message:
-            score += 5
-        if workday_part in printed_message:
-            score += 15
-        if weekend_part in printed_message:
-            score += 10
-        if len(lines) == 12:
-            score += 10
+        if printed_message:
+            lines = printed_message.split('\n')
+            lines = [line for line in lines if line]
+            if first_line in printed_message and second_line in printed_message and last_line in printed_message:
+                score += 5
+            if workday_part in printed_message:
+                score += 15
+            if weekend_part in printed_message:
+                score += 10
+            if len(lines) == 12:
+                score += 10
         return score
 
     def check_part_c_score(self, badminton_service_dir: str):

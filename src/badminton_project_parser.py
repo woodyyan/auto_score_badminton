@@ -9,7 +9,7 @@ class BadmintonProjectParser:
         for root, folders, files in os.walk(dir):
             for folder in folders:
                 if folder.startswith(prefix):
-                    student_id = folder.strip(prefix)
+                    student_id = folder[len(prefix):len(folder)]
                     all_files = self.__list_all_files(os.path.join(root, folder))
                     badminton_file = next(filter(lambda file: file.endswith(badminton_file_name), all_files), None)
                     project_specs.append(BadmintonSpec(student_id, os.path.dirname(badminton_file)))
