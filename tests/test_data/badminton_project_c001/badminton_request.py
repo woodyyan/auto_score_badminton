@@ -34,7 +34,7 @@ Welcome to badminton
         return constant.SORRY
     elif request_info == 'Book 0001 2019-12-01 20:00~23:00 3':
         return constant.SORRY
-    elif request_info == 'Cancel 0001 2019-12-11 14:00~15:00 3':
+    elif request_info == 'Cancel 0001 2019-12-01 14:00~15:00 3':
         return constant.CANCEL_SUCCESS
     elif request_info == 'Cancel 0001 2019-12-11 14:00~16:00 3':
         return 'Cancel Success! You need pay 25 yuan as penalty. Look forward to your next visit!'

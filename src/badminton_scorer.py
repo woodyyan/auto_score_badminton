@@ -12,11 +12,9 @@ class ScoreSummary:
 class BadmintonScorer:
     def check(self, badminton_service_dir: str) -> ScoreSummary:
         score_summary = ScoreSummary()
-        service = BadmintonService()
-        part_a_param = 'How much?'
-        part_a_message = service.request_service(badminton_service_dir, part_a_param)
-        score_summary.part_a_score = self.check_part_a_score(part_a_message)
+        score_summary.part_a_score = self.check_part_a_score(badminton_service_dir)
         score_summary.part_b_score = self.check_part_b_score(badminton_service_dir)
+        score_summary.part_c_score = self.check_part_c_score(badminton_service_dir)
         return score_summary
 
     def check_part_b_score(self, badminton_service_dir: str) -> int:
@@ -27,6 +25,7 @@ class BadmintonScorer:
         success_keyword = 'Success'
         if success_keyword in success_message:
             score += 5
+
         all_keywords = ['No.3', '2019', '12', '11', '14', '15']
         contained_keywords = [True for keyword in all_keywords if keyword in success_message]
         if len(contained_keywords) == len(all_keywords):
@@ -57,8 +56,7 @@ class BadmintonScorer:
             return expected_score
         return 0
 
-    def check_part_a_score(self, printed_message: str) -> int:
-
+    def check_part_a_score(self, badminton_service_dir: str) -> int:
         first_line = '********Price********'
         second_line = 'Welcome to badminton'
         last_line = '**Have a good day !**'
@@ -71,6 +69,10 @@ class BadmintonScorer:
 9:00~12:00 40 yuan/h
 12:00~18:00 50 yuan/h
 18:00~22:00 60 yuan/h'''
+
+        part_a_param = 'How much?'
+        service = BadmintonService()
+        printed_message = service.request_service(badminton_service_dir, part_a_param)
         lines = printed_message.split('\n')
         lines = [line for line in lines if line]
         score = 0
@@ -86,7 +88,7 @@ class BadmintonScorer:
 
     def check_part_c_score(self, badminton_service_dir: str):
         service = BadmintonService()
-        cancel_param = 'Cancel 0001 2019-12-11 14:00~15:00 3'
+        cancel_param = 'Cancel 0001 2019-12-01 14:00~15:00 3'
         success_message = service.request_service(badminton_service_dir, cancel_param)
         success_sentence = 'Cancel Success! Look forward to your next visit!'
         score = 0
