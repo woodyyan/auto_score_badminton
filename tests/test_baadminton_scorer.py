@@ -44,7 +44,7 @@ Welcome to badminton
         badminton_scorer = BadmintonScorer()
         dir = './test_data/badminton_project_c001'
         score = badminton_scorer.check_part_b_score(dir)
-        self.assertEqual(20, score)
+        self.assertEqual(26, score)
 
 
 if __name__ == '__main__':

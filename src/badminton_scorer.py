@@ -18,11 +18,15 @@ class BadmintonScorer:
         success_keyword = 'Success'
         if success_keyword in success_message:
             score += 5
-        # Success! You can use the No.3 court during 2019-12-11 14:00~15:00.
         all_keywords = ['No.3', '2019', '12', '11', '14', '15']
         contained_keywords = [True for keyword in all_keywords if keyword in success_message]
         if len(contained_keywords) == len(all_keywords):
             score += 15
+        invalid_time_param = 'Book 0001 2019-12-01 14:00~14:20 3'
+        fail_message = service.request_service(badminton_service_dir, invalid_time_param)
+        fail_sentence = 'Sorry! Something wrong, please call the manager!'
+        if fail_message == fail_sentence:
+            score += 6
 
         return score
 
