@@ -22,29 +22,31 @@ class BadmintonScorer:
         contained_keywords = [True for keyword in all_keywords if keyword in success_message]
         if len(contained_keywords) == len(all_keywords):
             score += 15
+
         invalid_time_param = 'Book 0001 2019-12-01 14:00~14:20 3'
-        fail_sentence = 'Sorry! Something wrong, please call the manager!'
-        fail_message = service.request_service(badminton_service_dir, invalid_time_param)
-        if fail_message == fail_sentence:
-            score += 6
+        score += self.__check_invalid_case(badminton_service_dir, invalid_time_param, 6)
+
         duplicated_book_param = 'Book 0001 2019-12-01 14:00~16:00 3'
-        fail_message = service.request_service(badminton_service_dir, duplicated_book_param)
-        if fail_message == fail_sentence:
-            score += 16
+        score += self.__check_invalid_case(badminton_service_dir, duplicated_book_param, 16)
+
         end_earlier_than_start_param = 'Book 0001 2019-12-01 15:00~14:00 3'
-        fail_message = service.request_service(badminton_service_dir, end_earlier_than_start_param)
-        if fail_message == fail_sentence:
-            score += 6
+        score += self.__check_invalid_case(badminton_service_dir, end_earlier_than_start_param, 6)
+
         start_time_earlier_param = 'Book 0001 2019-12-01 08:00~10:00 3'
-        fail_message = service.request_service(badminton_service_dir, start_time_earlier_param)
-        if fail_message == fail_sentence:
-            score += 6
+        score += self.__check_invalid_case(badminton_service_dir, start_time_earlier_param, 6)
+
         end_time_later_param = 'Book 0001 2019-12-01 20:00~23:00 3'
-        fail_message = service.request_service(badminton_service_dir, end_time_later_param)
-        if fail_message == fail_sentence:
-            score += 6
+        score += self.__check_invalid_case(badminton_service_dir, end_time_later_param, 6)
 
         return score
+
+    def __check_invalid_case(self, badminton_service_dir, invalid_param, expected_score):
+        fail_sentence = 'Sorry! Something wrong, please call the manager!'
+        service = BadmintonService()
+        fail_message = service.request_service(badminton_service_dir, invalid_param)
+        if fail_message == fail_sentence:
+            return expected_score
+        return 0
 
     def check_part_a_score(self, printed_message: str) -> int:
 
