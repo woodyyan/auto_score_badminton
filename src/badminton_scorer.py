@@ -35,6 +35,10 @@ class BadmintonScorer:
         fail_message = service.request_service(badminton_service_dir, end_earlier_than_start_param)
         if fail_message == fail_sentence:
             score += 6
+        start_time_earlier_param = 'Book 0001 2019-12-01 08:00~10:00 3'
+        fail_message = service.request_service(badminton_service_dir, start_time_earlier_param)
+        if fail_message == fail_sentence:
+            score += 6
 
         return score
 

@@ -6,6 +6,7 @@ from tests.test_data.badminton_project_c001.constant import HOW_MUCH
 
 book_count = 0
 
+
 def request_service(request_info: str) -> str:
     printed_message = '''********Price********
 Welcome to badminton
@@ -28,6 +29,8 @@ Welcome to badminton
     elif request_info == 'Book 0001 2019-12-01 14:00~14:20 3':
         return constant.SORRY
     elif request_info == 'Book 0001 2019-12-01 15:00~14:00 3':
+        return constant.SORRY
+    elif request_info == 'Book 0001 2019-12-01 08:00~10:00 3':
         return constant.SORRY
 
     return ''
