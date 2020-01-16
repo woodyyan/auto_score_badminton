@@ -10,8 +10,9 @@ class TestBadmintonService(unittest.TestCase):
 
     def test_should_return_correct_printed_message_when_run_badminton_py_file(self):
         badminton_service = BadmintonService()
-        badminton_dir = './test_data/badminton_project_c001'
-        message = badminton_service.request_service(badminton_dir, 'How much?')
+        root_dir = './test_data'
+        package_name = 'badminton_project_c001'
+        message = badminton_service.request_service(root_dir, package_name, 'How much?')
         expected_message = '''********Price********
 Welcome to badminton
 -------Workday-------
