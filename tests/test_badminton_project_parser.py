@@ -9,9 +9,9 @@ class TestBadmintonProjectParser(unittest.TestCase):
         badminton_dir = './test_data'
         project_specs = badminton_parser.build_all_project_specs(badminton_dir)
         self.assertEqual(len(project_specs), 1)
-        self.assertEqual(project_specs[0].student_id, '001')
-        self.assertEqual(project_specs[0].badminton_service_dir,
-                         './test_data/badminton_project_c001')
+        self.assertEqual(project_specs[0].student_id, 'c001')
+        self.assertEqual(project_specs[0].root_dir, './test_data')
+        self.assertEqual(project_specs[0].package_name, 'badminton_project_c001')
 
 
 if __name__ == '__main__':
