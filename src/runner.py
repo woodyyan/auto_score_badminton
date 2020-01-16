@@ -6,6 +6,6 @@ if __name__ == '__main__':
     print(len(student_scores))
     for score in student_scores:
         print(score.student_id)
-        print(score.score_summary.part_a_score)
-        print(score.score_summary.part_b_score)
-        print(score.score_summary.part_c_score)
+        print(score.part_a_score)
+        print(score.part_b_score)
+        print(score.part_c_score)
