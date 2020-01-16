@@ -97,10 +97,11 @@ class BadmintonScorer:
         penal_sum_param = 'Cancel 0001 2019-12-11 14:00~16:00 3'
         penal_sum_message = service.request_service(badminton_spec.root_dir, badminton_spec.package_name,
                                                     penal_sum_param)
-        first_penal_sum_keyword = 'Cancel Success! You need pay'
-        second_penal_sum_keyword = 'yuan as penalty. Look forward to your next visit!'
-        if first_penal_sum_keyword in penal_sum_message and second_penal_sum_keyword in penal_sum_message:
-            score += 15
+        if penal_sum_message:
+            first_penal_sum_keyword = 'Cancel Success! You need pay'
+            second_penal_sum_keyword = 'yuan as penalty. Look forward to your next visit!'
+            if first_penal_sum_keyword in penal_sum_message and second_penal_sum_keyword in penal_sum_message:
+                score += 15
 
         fail_sentence = 'Sorry! Something wrong, please try again!'
         wrong_book_time_param = 'Cancel 0001 2019-12-11 14:00~17:00 3'
