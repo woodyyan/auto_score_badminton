@@ -55,30 +55,33 @@ class BadmintonScorer:
         first_line = '********Price********'
         second_line = 'Welcome to badminton'
         last_line = '**Have a good day !**'
-        workday_part = '''-------Workday-------
-9:00~12:00 30 yuan/h
-12:00~18:00 50 yuan/h
-18:00~20:00 80 yuan/h
-20:00~22:00 60 yuan/h'''
-        weekend_part = '''-------Weekend-------
-9:00~12:00 40 yuan/h
-12:00~18:00 50 yuan/h
-18:00~22:00 60 yuan/h'''
+        workday_part = '-------Workday-------9:00~12:00 30 yuan/h12:00~18:00 50 yuan/h18:00~20:00 80 yuan/h20:00~22:00 60 yuan/h'
+        weekend_part = '-------Weekend-------9:00~12:00 40 yuan/h12:00~18:00 50 yuan/h18:00~22:00 60 yuan/h'
 
         part_a_param = 'How much?'
         service = BadmintonService()
         printed_message = service.request_service(badminton_spec.root_dir, badminton_spec.package_name, part_a_param)
         score = 0
         if printed_message:
-            lines = printed_message.split('\n')
-            lines = [line for line in lines if line]
-            if first_line in printed_message and second_line in printed_message and last_line in printed_message:
+            one_line = printed_message.replace('\r', '').replace('\n', '').strip()
+            first_line_index = 0
+            second_line_index = 0
+            last_line_index = 0
+            workday_index = 0
+            weekend_index = 0
+            if first_line in one_line and second_line in one_line and last_line in one_line:
                 score += 5
-            if workday_part in printed_message:
+                first_line_index = one_line.index(first_line)
+                second_line_index = one_line.index(second_line)
+                last_line_index = one_line.index(last_line)
+            if workday_part in one_line:
                 score += 15
-            if weekend_part in printed_message:
+                workday_index = one_line.index(workday_part)
+            if weekend_part in one_line:
                 score += 10
-            if len(lines) == 12:
+                weekend_index = one_line.index(weekend_part)
+            is_order_correct = first_line_index < second_line_index < workday_index < weekend_index < last_line_index
+            if is_order_correct:
                 score += 10
         return score
 
