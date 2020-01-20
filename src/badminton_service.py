@@ -24,6 +24,7 @@ class BadmintonService:
             request_service = getattr(badminton_request_module, REQUEST_SERVICE_FUNCTION_NAME)
             return request_service(param)
         except Exception as error:
+            print(package_name)
             print(error)
             return ''
         finally:

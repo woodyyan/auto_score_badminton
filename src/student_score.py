@@ -1,5 +1,5 @@
 class StudentScore:
-    def __init__(self, student_id):
+    def __init__(self, student_id: str):
         self.student_id = student_id
         self.part_a_score = 0
         self.part_b_score = 0
